@@ -6,7 +6,7 @@ import Update from './routes/Update';
 
 const App = () => {  
   return (
-    <div>      
+    <div className='container'>      
       <Router>
         <Routes>
           <Route exact path='/' Component={Home}/>
