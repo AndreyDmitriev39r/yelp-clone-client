@@ -1,4 +1,16 @@
-const RestaurantsList = () => {
+import { useEffect } from "react";
+import { useGlobalContext } from "../../context";
+
+import YelpyTheYelpClone from "../../apis/YelpyTheYelpClone";
+
+const RestaurantsList = () => {  
+
+  const {fetchData, restaurants} = useGlobalContext();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div className="list-group">
       <table className="table table-dark table-hover">
