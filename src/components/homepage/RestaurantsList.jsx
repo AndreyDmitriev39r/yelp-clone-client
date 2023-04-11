@@ -30,6 +30,7 @@ const RestaurantsList = () => {
             {restaurants.map(item =>
               <TableRow
                 key={item.restaurant_id}
+                id={item.restaurant_id}
                 name={item.name}
                 location={item.location}
                 priceRange={item.price_range}

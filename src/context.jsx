@@ -40,6 +40,18 @@ const AppContext = ({children}) => {
     }
   };
 
+  // delete restaurant logic
+
+  const handleDelete = async (id) => {
+    try {
+      await YelpyTheYelpClone.delete(`/${id}`);      
+      setRestaurants(prevRestaurants =>
+        prevRestaurants.filter(item => item.restaurant_id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{       
@@ -52,6 +64,7 @@ const AppContext = ({children}) => {
         setLocation,
         setPriceRange,
         handleSubmit,
+        handleDelete,
       }}
     >
       {children}

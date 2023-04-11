@@ -1,4 +1,7 @@
-const TableRow = ({name, location, priceRange}) => {
+import { useGlobalContext } from "../../context";
+
+const TableRow = ({name, location, priceRange ,id}) => {
+  const {handleDelete} = useGlobalContext();
   return (
     <tr>
       <td>{name}</td>
@@ -6,7 +9,7 @@ const TableRow = ({name, location, priceRange}) => {
       <td>{"$".repeat(priceRange)}</td>
       <td>dummy ratings</td>
       <td><button className="btn btn-warning">Update</button></td>
-      <td><button className="btn btn-danger">Delete</button></td>
+      <td><button className="btn btn-danger" onClick={() => handleDelete(id)}>Delete</button></td>
     </tr>
   )
 }
