@@ -24,33 +24,19 @@ const RestaurantsList = () => {
             <th scope="col">Delete</th>
           </tr>          
         </thead>
-        {/* dummy rows */}
-        <tbody>
-          {restaurants.length && restaurants.map(item =>
-            <TableRow
-              key={item.restaurant_id}
-              name={item.name}
-              location={item.location}
-              priceRange={item.price_range}
-            />
-          )}
-          {/* <tr>
-            <td>Mac</td>
-            <td>here</td>
-            <td>3</td>
-            <td>5</td>
-            <td>upd</td>
-            <td>del</td>
-          </tr>
-          <tr>
-            <td>kfc</td>
-            <td>there</td>
-            <td>1</td>
-            <td>1</td>
-            <td>upd</td>
-            <td>del</td>
-          </tr> */}
-        </tbody>
+        {
+          Boolean(restaurants.length) &&
+          <tbody>
+            {restaurants.map(item =>
+              <TableRow
+                key={item.restaurant_id}
+                name={item.name}
+                location={item.location}
+                priceRange={item.price_range}
+              />
+            )}          
+          </tbody>
+        }     
       </table>
     </div>
   )
