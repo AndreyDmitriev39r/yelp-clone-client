@@ -20,11 +20,38 @@ const AppContext = ({children}) => {
     } 
   };
 
+  // add restaurant logic
+
+  const [name, setName] = useState(() => "");
+  const [location, setLocation] = useState(() => "");
+  const [priceRange, setPriceRange] = useState(() => "Price range");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await YelpyTheYelpClone.post('/', {
+        name,
+        location,
+        price_range: priceRange
+      })
+      setRestaurants(prevRestaurants => [...prevRestaurants, response.data.data]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <GlobalContext.Provider
       value={{       
         fetchData,
         restaurants,
+        name,
+        location,
+        priceRange,
+        setName,
+        setLocation,
+        setPriceRange,
+        handleSubmit,
       }}
     >
       {children}

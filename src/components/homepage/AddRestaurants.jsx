@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useGlobalContext } from "../../context";
 
 const AddRestaurants = () => {
-  const [name, setName] = useState(() => "");
-  const [location, setLocation] = useState(() => "");
-  const [priceRange, setPriceRange] = useState("Price range");
+
+  const {name, location, priceRange,
+    setName, setLocation, setPriceRange, handleSubmit
+  } = useGlobalContext();
+
   return (
     <div className="mb-4">
       <form action="">
@@ -26,7 +28,9 @@ const AddRestaurants = () => {
               <option value="5">$$$$$</option>
             </select>
           </div>
-          <button className="btn-primary btn">Add</button>
+          <button
+            type="submit" onClick={handleSubmit}
+            className="btn-primary btn">Add</button>
         </div>
       </form>
     </div>
