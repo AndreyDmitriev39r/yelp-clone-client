@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../../context";
 
-import YelpyTheYelpClone from "../../apis/YelpyTheYelpClone";
+import TableRow from "./TableRow";
 
 const RestaurantsList = () => {  
 
@@ -26,7 +26,15 @@ const RestaurantsList = () => {
         </thead>
         {/* dummy rows */}
         <tbody>
-          <tr>
+          {restaurants.length && restaurants.map(item =>
+            <TableRow
+              key={item.restaurant_id}
+              name={item.name}
+              location={item.location}
+              priceRange={item.price_range}
+            />
+          )}
+          {/* <tr>
             <td>Mac</td>
             <td>here</td>
             <td>3</td>
@@ -41,7 +49,7 @@ const RestaurantsList = () => {
             <td>1</td>
             <td>upd</td>
             <td>del</td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
     </div>

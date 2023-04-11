@@ -12,7 +12,8 @@ const AppContext = ({children}) => {
   // fetching restaurants list from backend
   const fetchData = async () => {
     try {
-      const response = await YelpyTheYelpClone.get("/");      
+      const response = await YelpyTheYelpClone.get("/");
+      console.log(response.data.data);     
       setRestaurants(response.data.data);      
     } catch (err) {
       console.log(err);
