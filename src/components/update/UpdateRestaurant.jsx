@@ -1,12 +1,20 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../../context";
 
 const UpdateRestaurant = () => {
+
   const {id} = useParams();
   const {
     updateName, updateLocation, updatePriceRange,
-    setUpdateName, setUpdateLocation, setUpdatePriceRange, handleUpdateSubmit
+    setUpdateName, setUpdateLocation, setUpdatePriceRange, handleUpdateSubmit,
+    getRestaurantForUpdate,
   } = useGlobalContext();
+
+  useEffect(() => {
+    getRestaurantForUpdate(id);
+  }, []);
+
   return (
     <div>
       <form action="">
@@ -32,7 +40,7 @@ const UpdateRestaurant = () => {
               <option value="5">$$$$$</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleUpdateSubmit}>Update</button>
+        <button type="submit" className="btn btn-primary" onClick={(e) => handleUpdateSubmit(e, id)}>Update</button>
       </form>
     </div>
   )

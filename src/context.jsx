@@ -54,16 +54,42 @@ const AppContext = ({children}) => {
   // update restaurant logic
 
   const handleUpdate = (id) => {
-    window.open(`/restaurants/${id}/update`, '_blank');
+    window.open(`/restaurants/${id}/update`, "_self");
   }
 
   const [updateName, setUpdateName] = useState(() => "");
   const [updateLocation, setUpdateLocation] = useState(() => "");
   const [updatePriceRange, setUpdatePriceRange] = useState(() => "Price range");
 
-  const handleUpdateSubmit = (e) => {
-    e.preventDefault();
-    console.log(updateName, updateLocation, updatePriceRange);
+  // TODO figure out how to trigger refresh of homepage on submitupdate restaurant
+  // for now use workflow with switching pages in the same tab
+  const handleUpdateSubmit = async (e, id) => {
+    e.preventDefault();    
+    try {
+      await YelpyTheYelpClone.put(`/${id}`, {
+        name: updateName,
+        location: updateLocation,
+        price_range: updatePriceRange
+      })
+      window.open("/", "_self");   
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // if we would use context instead of retrieving
+  // values from backend, that could lead to errors
+  // if user would go to the page directly, not from homepage
+  const getRestaurantForUpdate = async (id) => {
+    try {
+      const response = await YelpyTheYelpClone.get(`/${id}`);      
+      const {name, location, price_range} = response.data.data;
+      setUpdateName(name);
+      setUpdateLocation(location);
+      setUpdatePriceRange(price_range);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -86,7 +112,8 @@ const AppContext = ({children}) => {
         setUpdateName,
         setUpdateLocation,
         setUpdatePriceRange,
-        handleUpdateSubmit,   
+        handleUpdateSubmit,
+        getRestaurantForUpdate,   
       }}
     >
       {children}
