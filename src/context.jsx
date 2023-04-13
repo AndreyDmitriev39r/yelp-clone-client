@@ -4,7 +4,7 @@ import YelpyTheYelpClone from "./apis/YelpyTheYelpClone";
 const GlobalContext = createContext();
 export const useGlobalContext = () => useContext(GlobalContext);
 
-const AppContext = ({children}) => {
+const AppContext = ({children}) => {  
 
   // restaurants list
   const [restaurants, setRestaurants] = useState(() => []);
@@ -12,8 +12,7 @@ const AppContext = ({children}) => {
   // fetching restaurants list from backend
   const fetchData = async () => {
     try {
-      const response = await YelpyTheYelpClone.get("/");
-      console.log(response.data.data);     
+      const response = await YelpyTheYelpClone.get("/");           
       setRestaurants(response.data.data);      
     } catch (err) {
       console.log(err);
@@ -52,6 +51,12 @@ const AppContext = ({children}) => {
     }
   };
 
+  // update restaurant logic
+
+  const handleUpdate = (id) => {
+    window.open(`/restaurants/${id}/update`, '_blank');
+  }
+
   return (
     <GlobalContext.Provider
       value={{       
@@ -65,6 +70,7 @@ const AppContext = ({children}) => {
         setPriceRange,
         handleSubmit,
         handleDelete,
+        handleUpdate      
       }}
     >
       {children}
