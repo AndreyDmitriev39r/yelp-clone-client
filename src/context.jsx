@@ -57,6 +57,15 @@ const AppContext = ({children}) => {
     window.open(`/restaurants/${id}/update`, '_blank');
   }
 
+  const [updateName, setUpdateName] = useState(() => "");
+  const [updateLocation, setUpdateLocation] = useState(() => "");
+  const [updatePriceRange, setUpdatePriceRange] = useState(() => "Price range");
+
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    console.log(updateName, updateLocation, updatePriceRange);
+  }
+
   return (
     <GlobalContext.Provider
       value={{       
@@ -70,7 +79,14 @@ const AppContext = ({children}) => {
         setPriceRange,
         handleSubmit,
         handleDelete,
-        handleUpdate      
+        handleUpdate,
+        updateName,
+        updateLocation,
+        updatePriceRange,
+        setUpdateName,
+        setUpdateLocation,
+        setUpdatePriceRange,
+        handleUpdateSubmit,   
       }}
     >
       {children}

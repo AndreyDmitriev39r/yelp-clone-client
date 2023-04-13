@@ -1,6 +1,12 @@
-const Update = () => {
+import UpdateHeader from "../components/update/UpdateHeader";
+import UpdateRestaurant from "../components/update/UpdateRestaurant";
+
+const Update = () => {  
   return (
-    <div>Update</div>
+    <div>
+      <UpdateHeader />
+      <UpdateRestaurant />
+    </div>
   )
 };
 
