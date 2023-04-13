@@ -41,7 +41,8 @@ const AppContext = ({children}) => {
 
   // delete restaurant logic
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e, id) => {
+    e.stopPropagation();
     try {
       await YelpyTheYelpClone.delete(`/${id}`);      
       setRestaurants(prevRestaurants =>
@@ -53,7 +54,8 @@ const AppContext = ({children}) => {
 
   // update restaurant logic
 
-  const handleUpdate = (id) => {
+  const handleUpdate = (e, id) => {
+    e.stopPropagation();
     window.open(`/restaurants/${id}/update`, "_self");
   }
 
@@ -92,6 +94,26 @@ const AppContext = ({children}) => {
     }
   }
 
+  // restaurant details functionality
+
+  const handleRestaurantSelect = (id) => {
+    window.open(`/restaurants/${id}`, "_self");
+  }
+
+  // later probably change this to selectedRestaurant
+  // state variable, which will store all data from response
+  const [detailHeading, setDetailHeading] = useState(() => "");
+
+  const getSingleRestaurant = async (id) => {
+    try {
+      const response = await YelpyTheYelpClone.get(`/${id}`);
+      const {name} = response.data.data;
+      setDetailHeading(name);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{       
@@ -113,7 +135,10 @@ const AppContext = ({children}) => {
         setUpdateLocation,
         setUpdatePriceRange,
         handleUpdateSubmit,
-        getRestaurantForUpdate,   
+        getRestaurantForUpdate,
+        handleRestaurantSelect,
+        detailHeading,
+        getSingleRestaurant,
       }}
     >
       {children}
