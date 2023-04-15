@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import {useParams} from "react-router-dom";
 import { useGlobalContext } from "../context";
 
+import StarRating from "../components/StarRating";
+
 const Detail = () => {
   const {id} = useParams();
   const {detailHeading, getSingleRestaurant} = useGlobalContext();
@@ -9,9 +11,9 @@ const Detail = () => {
     getSingleRestaurant(id);
   }, [])
   return (
-    <>
-      <div>Detail</div>
+    <>      
       <h1>{detailHeading}</h1>
+      <StarRating />
     </>
   )
 };
