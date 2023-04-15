@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import {useParams} from "react-router-dom";
 import { useGlobalContext } from "../context";
 
-import StarRating from "../components/StarRating";
+import Reviews from "../components/detail/Reviews";
 
 const Detail = () => {
   const {id} = useParams();
@@ -12,8 +12,8 @@ const Detail = () => {
   }, [])
   return (
     <>      
-      <h1>{detailHeading}</h1>
-      <StarRating />
+      <h1 className="text-center">{detailHeading}</h1>
+      <Reviews />
     </>
   )
 };
